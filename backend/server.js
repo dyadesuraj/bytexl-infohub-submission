@@ -71,18 +71,45 @@ app.get('/api/currency', async (req, res) => {
  * [GET] /api/quote
  * Fetches a random motivational quote.
  */
-app.get('/api/quote', async (req, res) => {
-  // Using a free, no-key-required API
-  const url = 'https://api.quotable.io/random?tags=motivation|inspiration';
+// A list of mock quotes to use as a fallback
+const mockQuotes = [
+  {
+    content: "The best way to get started is to quit talking and begin doing.",
+    author: "Walt Disney"
+  },
+  {
+    content: "The future belongs to those who believe in the beauty of their dreams.",
+    author: "Eleanor Roosevelt"
+  },
+  {
+    content: "It is during our darkest moments that we must focus to see the light.",
+    author: "Aristotle"
+  },
+  {
+    content: "Whoever is happy will make others happy too.",
+    author: "Anne Frank"
+  },
+  {
+    content: "Do not let what you cannot do interfere with what you can do.",
+    author: "John Wooden"
+  }
+];
 
+/**
+ * [GET] /api/quote
+ * Fetches a random motivational quote.
+ * (NOW MOCKED to avoid external API failure)
+ */
+app.get('/api/quote', async (req, res) => {
   try {
-    const response = await axios.get(url);
-    const quote = {
-      content: response.data.content,
-      author: response.data.author,
-    };
-    res.json(quote);
+    // Pick a random quote from our mock list
+    const randomQuote = mockQuotes[Math.floor(Math.random() * mockQuotes.length)];
+    
+    // Send the mock quote as the response
+    res.json(randomQuote);
+
   } catch (error) {
+    // This code will likely not run, but it's good practice
     res.status(500).json({ error: 'Error fetching quote.' });
   }
 });
