@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 // Use the VITE_ prefix for environment variables in Vite
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_URL = import.meta.env.DEV ? 'http://localhost:3001' : '';
 
 function Weather() {
   const [city, setCity] = useState('');
