@@ -103,7 +103,7 @@ const mockQuotes = [
 app.get('/api/quote', async (req, res) => {
   try {
     // Pick a random quote from our mock list
-    const randomQuote = mockQuotes[Math.floor(Math.random() * mockQuotes.length)];
+    const randomQuote = mockQuotes[Math.ceil(Math.random() * mockQuotes.length)];
     
     // Send the mock quote as the response
     res.json(randomQuote);
