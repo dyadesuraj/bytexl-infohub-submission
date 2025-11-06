@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-
 function Quote() {
   const [quote, setQuote] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -12,7 +10,7 @@ function Quote() {
     setLoading(true);
     setError('');
     try {
-      const response = await axios.get(`${API_URL}/api/quote`);
+      const response = await axios.get('/api/quote');
       setQuote(response.data);
     } catch (err) {
       setError('Failed to fetch a quote.');

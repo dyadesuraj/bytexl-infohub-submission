@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
-// Use the VITE_ prefix for environment variables in Vite
-const API_URL = import.meta.env.DEV ? 'http://localhost:3001' : '';
-
 function Weather() {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState(null);
@@ -21,7 +17,7 @@ function Weather() {
     setWeather(null);
 
     try {
-      const response = await axios.get(`${API_URL}/api/weather?city=${city}`);
+      const response = await axios.get(/api/weather?city=${city});
       setWeather(response.data);
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to fetch weather. Please try again.');

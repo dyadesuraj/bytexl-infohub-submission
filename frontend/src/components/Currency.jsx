@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-
 function Currency() {
   const [rates, setRates] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -13,7 +11,7 @@ function Currency() {
       setLoading(true);
       setError('');
       try {
-        const response = await axios.get(`${API_URL}/api/currency`);
+        const response = await axios.get('/api/currency');
         setRates(response.data);
       } catch (err) {
         setError('Failed to fetch currency rates.');
