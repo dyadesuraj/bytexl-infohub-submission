@@ -10,6 +10,7 @@ function Quote() {
     setLoading(true);
     setError('');
     try {
+      // Uses the hardcoded relative path
       const response = await axios.get('/api/quote');
       setQuote(response.data);
     } catch (err) {
@@ -20,13 +21,13 @@ function Quote() {
   };
 
   useEffect(() => {
-    fetchQuote(); // Fetch a quote when the component first loads
+    fetchQuote();
   }, []);
 
   return (
     <div className="module">
       <h2>Motivational Quote</h2>
-      
+
       {loading && <div className="loader">Loading quote...</div>}
       {error && <div className="error-message">{error}</div>}
 

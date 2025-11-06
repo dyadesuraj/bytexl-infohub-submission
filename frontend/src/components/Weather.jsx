@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+
 function Weather() {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState(null);
@@ -17,7 +18,8 @@ function Weather() {
     setWeather(null);
 
     try {
-      const response = await axios.get(/api/weather?city=${city} );
+      // Uses the hardcoded relative path
+      const response = await axios.get(`/api/weather?city=${city}`);
       setWeather(response.data);
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to fetch weather. Please try again.');
@@ -41,10 +43,9 @@ function Weather() {
         </button>
       </form>
 
-      {/* Show loading or error states neatly */}
       {loading && <div className="loader">Loading...</div>}
       {error && <div className="error-message">{error}</div>}
-      
+
       {weather && (
         <div className="module-content weather-result">
           <h3>{weather.name}, {weather.sys.country}</h3>

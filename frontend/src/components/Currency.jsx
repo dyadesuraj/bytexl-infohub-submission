@@ -11,6 +11,7 @@ function Currency() {
       setLoading(true);
       setError('');
       try {
+        // Uses the hardcoded relative path
         const response = await axios.get('/api/currency');
         setRates(response.data);
       } catch (err) {
@@ -21,12 +22,12 @@ function Currency() {
     };
 
     fetchRates();
-  }, []); // Runs once on component mount
+  }, []);
 
   return (
     <div className="module">
       <h2>Currency Conversion (from INR)</h2>
-      
+
       {loading && <div className="loader">Loading rates...</div>}
       {error && <div className="error-message">{error}</div>}
 
