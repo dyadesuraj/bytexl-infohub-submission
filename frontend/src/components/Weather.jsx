@@ -18,10 +18,11 @@ function Weather() {
     setWeather(null);
 
     try {
-      // Uses the hardcoded relative path
+      // Correct: uses backticks ` ` for the URL string
       const response = await axios.get(`/api/weather?city=${city}`);
       setWeather(response.data);
     } catch (err) {
+      // Correct: catch block is clean
       setError(err.response?.data?.error || 'Failed to fetch weather. Please try again.');
     } finally {
       setLoading(false);
